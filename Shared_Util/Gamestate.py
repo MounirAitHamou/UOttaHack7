@@ -9,7 +9,7 @@ class Gamestate:
                  nextPieces: list[Pieces] = [Piece.generateRandomPiece() for _ in range(3)],
                  score: int = 0,
                  bestMove: Piece = None,
-                 tickSpeed: int = 0,
+                 tickTime: int = 1,
                  ):
         self.playfield = playfield
         self.holdPiece = holdPiece
