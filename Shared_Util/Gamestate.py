@@ -10,9 +10,12 @@ class GameState:
                  score: int = 0,
                  bestMove: Piece = None,
                  tickTime: int = 1,
+                 playerPiece: Piece = None,
                  ):
         self.playfield = playfield
         self.holdPiece = holdPiece
         self.nextPieces = nextPieces
         self.score = score
         self.bestMove = bestMove
+        self.tickTime = tickTime
+        self.playerPiece = playerPiece
