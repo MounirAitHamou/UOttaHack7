@@ -19,3 +19,10 @@ class GameState:
         self.bestMove = bestMove
         self.tickTime = tickTime
         self.playerPiece = playerPiece
+
+    def display(self):
+        for row in self.playfield:
+            for pixel in row:
+                print(1 if pixel.filled else 0, end='')
+            print()
+       

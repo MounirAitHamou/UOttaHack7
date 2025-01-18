@@ -8,3 +8,4 @@ class Pieces(Enum):
     S = 4
     T = 5
     Z = 6
+    EMPTY = 7
