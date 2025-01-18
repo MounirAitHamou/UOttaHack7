@@ -2,7 +2,7 @@ from Pixel import Pixel
 from Pieces import Pieces
 from Piece import Piece
 
-class Gamestate:
+class GameState:
     def __init__(self,
                  playfield: list[list[Pixel]] = [[Pixel() for _ in range(20)] for _ in range(10)],
                  holdPiece: Pieces = None,

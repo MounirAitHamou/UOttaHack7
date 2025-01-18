@@ -2,6 +2,7 @@ from Pieces import Pieces
 from Colors import Colors
 from Coordinates import Coordinates
 from random import random
+
 class Piece:
     def __init__(self,
                  coordinates: Coordinates = Coordinates(0, 0),
