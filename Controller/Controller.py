@@ -26,31 +26,19 @@ class Controller:
             rotations_needed,direction = counter_clockwise_rotations, -1
 
         for _ in range(rotations_needed):
-            self.gameState.playerPiece.rotate(direction)
+            playerPiece.rotate(direction)
             
-        
         distance = action.coordinates.x - playerPiece.coordinates.x
         if distance > 0:
             for _ in range(distance):
-                self.gameState.playerPiece.move(1)
+                playerPiece.move(1)
         else:
             for _ in range(-distance):
-                self.gameState.playerPiece.move(-1)
+                playerPiece.move(-1)
 
 
 
             
 
 
-       
-
-
-
-
-
-
-
-
-myController = Controller()
-myController.gameState.display()
-        
+    

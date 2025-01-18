@@ -7,7 +7,9 @@ class Piece:
     def __init__(self,
                  coordinates: Coordinates = Coordinates(0, 0),
                  type: Pieces = Pieces.I,
-                 rotation: int = 0):
+                 rotation: int = 0,
+                 blocks: list[Coordinates] = None
+                 ):
         self.coordinates = coordinates
         self.type = type
         self.rotation = rotation
@@ -19,6 +21,9 @@ class Piece:
     def rotate(self, direction: int):
         self.rotation+=direction
 
-        
+
     def move(self, direction: int):
-        self.coordinates.x+=direction
+        for block in self.blocks:
+            block.x+=direction
+        Coordinates.x+=direction
+        
