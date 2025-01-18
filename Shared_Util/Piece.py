@@ -1,6 +1,6 @@
-from Pieces import Pieces
-from Colors import Colors
-from Coordinates import Coordinates
+from Shared_Util.Pieces import Pieces
+from Shared_Util.Colors import Colors
+from Shared_Util.Coordinates import Coordinates
 from random import random
 
 class Piece:
@@ -13,5 +13,5 @@ class Piece:
         self.rotation = rotation
         self.color = Colors[self.type]
 
-    def generateRandomPiece(self):
+    def generateRandomPiece():
         pass

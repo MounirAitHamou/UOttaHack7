@@ -1,4 +1,4 @@
-from Colors import Colors
+from Shared_Util.Colors import Colors
 
 class Pixel:
     def __init__(self,
