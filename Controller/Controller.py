@@ -3,7 +3,6 @@ import time
 import sys
 import os
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Shared_Util.Gamestate import GameState
 from Shared_Util.Piece import Piece
 
@@ -28,7 +27,7 @@ class Controller:
 
         distance = action.coordinates.x - playerPiece.coordinates.x
 
-        
+
             
 
 
