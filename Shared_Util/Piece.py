@@ -13,7 +13,7 @@ class Piece:
         self.coordinates = coordinates
         self.type = type
         self.rotation = rotation
-        self.color = Colors[self.type]
+        self.color = Colors[self.type.name]
 
     def generateRandomPiece():
         pass
@@ -26,4 +26,3 @@ class Piece:
         for block in self.blocks:
             block.x+=direction
         Coordinates.x+=direction
-        

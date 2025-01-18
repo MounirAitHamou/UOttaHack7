@@ -5,5 +5,5 @@ from Input_Processing.GameStateProcessor import moveParametersFromGameState
 from Model.Model_Wrapper import evaluateMove
 
 def getModelBestMove(gameState: GameState) -> Piece:
-    moveParameters: MoveParameters = moveParametersFromGameState(gameState)
+    moveParameters: list[MoveParameters] = moveParametersFromGameState(gameState)
     return evaluateMove(moveParameters)
