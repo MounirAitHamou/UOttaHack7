@@ -16,6 +16,10 @@ class Block:
 		self.row_offset += rows
 		self.column_offset += columns
 
+	def resetOffset(self):
+		self.row_offset = 0
+		self.column_offset = 0
+
 	def get_cell_positions(self):
 		tiles = self.cells[self.rotation_state]
 		moved_tiles = []

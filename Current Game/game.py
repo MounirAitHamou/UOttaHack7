@@ -1,5 +1,6 @@
 from grid import Grid
 from blocks import *
+import block
 import random
 import pygame
 import os
@@ -10,9 +11,9 @@ class Game:
 		self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
 		self.current_block = self.get_random_block()
 		self.next_block = self.get_random_block()
+		self.stored_block = None
 		self.game_over = False
 		self.score = 0
-		self.block_placed = False
 
 	def update_score(self, lines_cleared, move_down_points):
 		if lines_cleared == 1:
@@ -23,11 +24,24 @@ class Game:
 			self.score += 500
 		self.score += move_down_points
 
+	def store_block(self):
+		if self.stored_block == None:
+			self.current_block.resetOffset()
+			self.stored_block = self.current_block
+			self.current_block = self.next_block
+			self.next_block = self.get_random_block()
+		else:
+			temp = self.stored_block
+			self.current_block.resetOffset()
+			self.stored_block = self.current_block
+			self.current_block = temp
+
 	def get_random_block(self):
 		if len(self.blocks) == 0:
 			self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
 		block = random.choice(self.blocks)
 		self.blocks.remove(block)
+		block.resetOffset()
 		return block
 
 	def move_left(self):
@@ -90,8 +104,14 @@ class Game:
 		self.current_block.draw(screen, 11, 11)
 
 		if self.next_block.id == 3:
-			self.next_block.draw(screen, 255, 290)
+			self.next_block.draw(screen, 340, 275)
 		elif self.next_block.id == 4:
-			self.next_block.draw(screen, 255, 280)
+			self.next_block.draw(screen, 370, 270)
 		else:
-			self.next_block.draw(screen, 270, 270)
+			self.next_block.draw(screen, 370, 270)
+
+		if self.stored_block != None:
+			if self.stored_block.id == 3:
+				self.stored_block.draw(screen, 340, 495)
+			else: 
+				self.stored_block.draw(screen, 370, 500)

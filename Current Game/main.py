@@ -6,10 +6,12 @@ pygame.init()
 title_font = pygame.font.Font(None, 40)
 score_surface = title_font.render("Score", True, Colors.white)
 next_surface = title_font.render("Next", True, Colors.white)
+stored_surface = title_font.render("Stored", True, Colors.white)
 game_over_surface = title_font.render("GAME OVER", True, Colors.white)
 
 score_rect = pygame.Rect(320, 55, 170, 60)
 next_rect = pygame.Rect(320, 215, 170, 180)
+stored_rect = pygame.Rect(320, 435, 170, 180)
 game_speed = 60
 pause = False
 
@@ -26,6 +28,7 @@ def ai_move(position,rotation):
 	temp = game.next_block
 	while game.current_block != temp:
 		game.move_down()
+
 GAME_UPDATE = pygame.USEREVENT
 
 
@@ -40,6 +43,8 @@ while True:
 				game.reset()
 			if event.key == pygame.K_LEFT and game.game_over == False:
 				game.move_left()
+			if event.key == pygame.K_8 and game.game_over == False:
+				game.store_block()
 			if event.key == pygame.K_RIGHT and game.game_over == False:
 				game.move_right()
 			if event.key == pygame.K_DOWN and game.game_over == False:
@@ -60,6 +65,7 @@ while True:
 	screen.fill(Colors.dark_blue)
 	screen.blit(score_surface, (365, 20, 50, 50))
 	screen.blit(next_surface, (375, 180, 50, 50))
+	screen.blit(stored_surface, (360, 405, 50, 50))
 
 	if game.game_over == True:
 		screen.blit(game_over_surface, (320, 450, 50, 50))
@@ -68,6 +74,7 @@ while True:
 	screen.blit(score_value_surface, score_value_surface.get_rect(centerx = score_rect.centerx, 
 		centery = score_rect.centery))
 	pygame.draw.rect(screen, Colors.light_blue, next_rect, 0, 10)
+	pygame.draw.rect(screen, Colors.light_blue, stored_rect, 0, 10)
 	game.draw(screen)
 
 	pygame.display.update()
