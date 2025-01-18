@@ -15,3 +15,10 @@ class Piece:
 
     def generateRandomPiece():
         pass
+
+    def rotate(self, direction: int):
+        self.rotation+=direction
+
+        
+    def move(self, direction: int):
+        self.coordinates.x+=direction
