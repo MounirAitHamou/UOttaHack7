@@ -1,6 +1,6 @@
-from Pixel import Pixel
-from Pieces import Pieces
-from Piece import Piece
+from Shared_Util.Pixel import Pixel
+from Shared_Util.Pieces import Pieces
+from Shared_Util.Piece import Piece
 
 class GameState:
     def __init__(self,

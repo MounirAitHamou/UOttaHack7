@@ -8,3 +8,4 @@ class Colors(Enum):
     S = "GREEN"
     T = "PURPLE"
     Z = "RED"
+    EMPTY = "BLACK"
