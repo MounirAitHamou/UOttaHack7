@@ -4,6 +4,7 @@ import Game.components.block
 import random
 import pygame
 import os
+import copy
 
 class Game:
 	def __init__(self):
@@ -11,9 +12,14 @@ class Game:
 		self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
 		self.current_block = self.get_random_block()
 		self.next_block = self.get_random_block()
+		self.recommendation = copy.copy(self.current_block)
 		self.stored_block = None
 		self.game_over = False
 		self.score = 0
+		aiRecommendation = [3,1]
+		for i in range(aiRecommendation[1]):
+			self.recommendation.rotate()
+		self.recommendation.move(1, aiRecommendation[0])
 
 	def update_score(self, lines_cleared, move_down_points):
 		if lines_cleared == 1:
@@ -66,6 +72,8 @@ class Game:
 		for position in tiles:
 			self.grid.grid[position.row][position.column] = self.current_block.id
 		self.current_block = self.next_block
+		self.recommendation = copy.copy(self.current_block)
+		self.setRecommendation([3,0])
 		self.next_block = self.get_random_block()
 		rows_cleared = self.grid.clear_full_rows()
 		if rows_cleared > 0:
@@ -98,20 +106,26 @@ class Game:
 			if self.grid.is_inside(tile.row, tile.column) == False:
 				return False
 		return True
+	
+	def setRecommendation(self,aiRecommendation):
+		for i in range(aiRecommendation[1]):
+			self.recommendation.rotate()
+		self.recommendation.move(1, aiRecommendation[0])
 
 	def draw(self, screen):
 		self.grid.draw(screen)
-		self.current_block.draw(screen, 11, 11)
+		self.current_block.draw(screen, 11, 11, 0)
+		self.recommendation.draw(screen, 11, 11, 1)
 
 		if self.next_block.id == 3:
-			self.next_block.draw(screen, 340, 275)
+			self.next_block.draw(screen, 340, 275, 0)
 		elif self.next_block.id == 4:
-			self.next_block.draw(screen, 370, 270)
+			self.next_block.draw(screen, 370, 270, 0)
 		else:
-			self.next_block.draw(screen, 370, 270)
+			self.next_block.draw(screen, 370, 270, 0)
 
 		if self.stored_block != None:
 			if self.stored_block.id == 3:
-				self.stored_block.draw(screen, 340, 495)
+				self.stored_block.draw(screen, 340, 495, 0)
 			else: 
-				self.stored_block.draw(screen, 370, 500)
+				self.stored_block.draw(screen, 370, 500, 0)
