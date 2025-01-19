@@ -19,6 +19,9 @@ class Trainer:
 
     def attemptToMoveLeft(self) -> bool:
         return self.game.move_left()
+    
+    def attemptToMoveRight(self) -> bool:
+        return self.game.move_right()
 
     def lockBlock(self):
         self.game.lock_block()
@@ -26,3 +29,8 @@ class Trainer:
     def moveDown(self):
         while self.game.current_block != self.game.next_block:
             self.game.move_down()
+    
+    def checkValid(self):
+        if self.game.block_inside == False or self.game.block_fits() == False:
+            return False
+        return True
