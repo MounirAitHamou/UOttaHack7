@@ -5,7 +5,7 @@ import random
 import pygame
 import os
 import copy
-#from AI.AI_Wrapper import getBestMove
+from AI.AI_Wrapper import getBestMove
 
 class Game:
 	def __init__(self):
@@ -17,7 +17,7 @@ class Game:
 		self.game_over = False
 		self.score = 0
 		self.recommendation = copy.copy(self.current_block)
-		#self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
+		self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
 
 	def update_score(self, lines_cleared):
 		self.score+= lines_cleared
@@ -34,15 +34,13 @@ class Game:
 			self.stored_block = self.current_block
 			self.current_block = self.next_block
 			self.next_block = self.get_random_block()
-			#self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
+			self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
 		else:
 			temp = self.stored_block
 			self.current_block.resetOffset()
 			self.stored_block = self.current_block
 			self.current_block = temp
-			#self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
-
-		
+			self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
 
 	def get_random_block(self):
 		if len(self.blocks) == 0:
@@ -83,7 +81,7 @@ class Game:
 			self.update_score(rows_cleared)
 		if self.block_fits() == False:
 			self.game_over = True
-		#self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))  
+		self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))  
 
 	def reset(self):
 		self.grid.reset()
