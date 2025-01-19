@@ -31,7 +31,7 @@ class Grid:
 				return False
 		return True
 
-	def get_game_state(self):
+	def get_gameState(self):
 		return self.grid
 	
 	def clear_row(self, row):
