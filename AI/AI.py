@@ -1,6 +1,6 @@
-from Game.components.block import Block
-from Game.components.grid import Grid
-from Game.Trainer import Trainer
+from TetrisGame.components.block import Block
+from TetrisGame.components.grid import Grid
+from TetrisGame.Trainer import Trainer
 from AI.GameComponentUtils import cloneBlock, cloneGrid, lockBlock, attemptToMoveLeft, attemptToMoveRight, moveDown, checkValid
 from AI.MoveParameters import MoveParameters
 import copy

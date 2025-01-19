@@ -1,6 +1,6 @@
 import copy
-from Game.components.block import Block
-from Game.components.grid import Grid
+from TetrisGame.components.block import Block
+from TetrisGame.components.grid import Grid
 
 def cloneBlock(block: Block) -> Block:
     return copy.deepcopy(block)

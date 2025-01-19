@@ -1,7 +1,6 @@
 import pygame,sys
-from Game.components.game import Game
-from Game.components.colors import Colors
-from AI.AI_Wrapper import getBestMove
+from TetrisGame.components.game import Game
+from TetrisGame.components.colors import Colors
 
 class Controller:
     def startGame():

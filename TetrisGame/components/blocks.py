@@ -1,5 +1,5 @@
-from Game.components.block import Block
-from Game.components.position import Position
+from TetrisGame.components.block import Block
+from TetrisGame.components.position import Position
 
 class LBlock(Block):
 	def __init__(self):

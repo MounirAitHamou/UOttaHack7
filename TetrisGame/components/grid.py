@@ -1,5 +1,5 @@
 import pygame
-from Game.components.colors import Colors
+from TetrisGame.components.colors import Colors
 
 class Grid:
 	def __init__(self):

@@ -1,7 +1,7 @@
 import random as random
 import math as math
 from AI.AI import AI
-from Game.Trainer import Trainer
+from TetrisGame.Trainer import Trainer
 def randomInteger(min, max):
     return math.floor(random.random() * (max - min ) + min)
 

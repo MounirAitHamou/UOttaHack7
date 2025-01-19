@@ -1,6 +1,6 @@
-from Game.components.block import Block
-from Game.components.blocks import *
-from Game.components.game import Game
+from TetrisGame.components.block import Block
+from TetrisGame.components.blocks import *
+from TetrisGame.components.game import Game
 import random
 
 class Trainer:

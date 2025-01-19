@@ -1,4 +1,4 @@
-from Game.Controller import Controller
+from TetrisGame.Controller import Controller
 from AI.Tuner import tune
 
 doTune = True

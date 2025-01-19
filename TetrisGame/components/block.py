@@ -1,6 +1,6 @@
-from Game.components.colors import Colors
+from TetrisGame.components.colors import Colors
 import pygame
-from Game.components.position import Position
+from TetrisGame.components.position import Position
 
 class Block:
 	def __init__(self, id):
