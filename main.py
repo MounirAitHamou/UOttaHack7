@@ -1,7 +1,7 @@
 from Game.Controller import Controller
 from AI.Tuner import tune
 
-doTune = False
+doTune = True
 
 def main():
     if doTune:

@@ -37,13 +37,14 @@ class AI:
                 else:
                     score = self.best(gridClone, playingPieces, playingPieceIndex + 1)[1]
                 
-
-                if bestScore is None or score > bestScore:
-                    bestScore = score
+                if bestScore is None:
                     best = cloneBlock(pieceCopy)
+                    if not score is None:
+                        bestScore = score
+                elif score is not None and score > bestScore:
+                    best = cloneBlock(pieceCopy)
+                    bestScore = score
                 
-
-                    
                 attemptToMoveRight(grid, piece)
         return (best, bestScore)
 
