@@ -74,10 +74,4 @@ def moveParametersFromGameState(gameState: GameState) -> list[MoveParameters]:
             # Calculate the Vertical Distance
             verticalDistance: int = 0
 
-            moveParameters.append(MoveParameters(aggregateHeight, totalCompleteLines, totalHoles, bumpiness, verticalDistance))
-
-def canMove(gameState, piece):
-    return True
-
-def dropPiece(gameState, piece):
-    pass
+            moveParameters.append(MoveParameters(aggregateHeight, totalCompleteLines, totalHoles, bumpiness))
