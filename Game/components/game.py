@@ -5,6 +5,7 @@ import random
 import pygame
 import os
 import copy
+from AI.AI_Wrapper import getBestMove
 
 class Game:
 	def __init__(self):
@@ -20,29 +21,26 @@ class Game:
 	def update_score(self, lines_cleared):
 		self.score+= lines_cleared
 		
-	def doAiMove(self, aiRecommendation):
-		self.current_block.resetOffset()
-		self.current_block.rotation_state = 0
-		for i in range(aiRecommendation[1]):
-			self.current_block.rotate()
-		for i in range(aiRecommendation[0]):
-			self.move_right()
-		temp = self.next_block
-		while self.current_block != temp:
-			self.move_down()
+	def doAiMove(self):
+		self.current_block = self.recommendation
+		self.move_down()
 
 
-	def store_block(self,):
+
+	def store_block(self):
 		if self.stored_block == None:
 			self.current_block.resetOffset()
 			self.stored_block = self.current_block
 			self.current_block = self.next_block
 			self.next_block = self.get_random_block()
+			self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
 		else:
 			temp = self.stored_block
 			self.current_block.resetOffset()
 			self.stored_block = self.current_block
 			self.current_block = temp
+			self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
+
 		
 
 	def get_random_block(self):
@@ -74,6 +72,9 @@ class Game:
 		tiles = self.current_block.get_cell_positions()
 		for position in tiles:
 			self.grid.grid[position.row][position.column] = self.current_block.id
+		self.end_move()
+
+	def end_move(self):
 		self.current_block = self.next_block
 		self.next_block = self.get_random_block()
 		rows_cleared = self.grid.clear_full_rows()
@@ -81,6 +82,7 @@ class Game:
 			self.update_score(rows_cleared)
 		if self.block_fits() == False:
 			self.game_over = True
+		self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))  
 
 	def reset(self):
 		self.grid.reset()
@@ -109,12 +111,7 @@ class Game:
 		return True
 	
 	def setRecommendation(self,aiRecommendation):
-		self.recommendation = copy.copy(self.current_block)
-		self.recommendation.resetOffset()
-		self.recommendation.rotation_state = 0
-		for i in range(aiRecommendation[1]):
-			self.recommendation.rotate()
-		self.recommendation.move(1, aiRecommendation[0])
+		self.recommendation = copy.deepcopy(aiRecommendation)
 
 	def draw(self, screen):
 		self.grid.draw(screen)
