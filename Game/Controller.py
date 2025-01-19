@@ -31,8 +31,13 @@ class Controller:
 
         clock = pygame.time.Clock()
 
-        game = Game()
+        def getRecommendation():
+            return [3,1]
 
+        game = Game()
+        game.setRecommendation(getRecommendation())
+
+        
         GAME_UPDATE = pygame.USEREVENT
         pygame.time.set_timer(GAME_UPDATE, 200)
 
@@ -51,25 +56,32 @@ class Controller:
                         game.move_right()
                     if event.key == pygame.K_DOWN and game.game_over == False:
                         game.move_down()
+                        game.setRecommendation(getRecommendation())
                     if event.key == pygame.K_UP and game.game_over == False:
                         game.rotate()
+                    if event.key == pygame.K_2 and game.game_over == False:
+                        game.doAiMove(getRecommendation())
+                        game.setRecommendation(getRecommendation())
                     if event.key == pygame.K_1 and game.game_over == False:
                         if temp1 != game.current_block:
                             game.store_block()
+                            game.setRecommendation(getRecommendation())
                             temp1 = game.current_block
                     if event.key == pygame.K_9 and game.game_over == False:
-                        pause = True
+                        pause = not pause
                     if event.key == pygame.K_SPACE and game.game_over == False:
                         temp = game.next_block
                         while game.current_block != temp:
                             game.move_down()
+                            game.setRecommendation(getRecommendation())
                 if event.type == GAME_UPDATE and game.game_over == False:
                     if pause != True:
                         game.move_down()
+                        game.setRecommendation(getRecommendation())
             if temp1 != game.current_block:
                 temp1 = None
-            #Drawing
             score_value_surface = title_font.render(str(game.score), True, Colors.white)
+            score_text_surface = title_font.render("Lines Cleared", True, Colors.white)
             next_value_surface = title_font.render("Incoming", True, Colors.white)
             stored_value_surface = title_font.render("Stored", True, Colors.white)
 
@@ -97,13 +109,15 @@ class Controller:
             pygame.draw.rect(screen, (0, 0, 0),scoreOut1)
             pygame.draw.rect(screen, Colors.white, scoreRect)
 
-            colour_rect = pygame.Surface( ( 2, 2 ) )                                   # tiny! 2x2 bitmap
-            pygame.draw.line( colour_rect, (206,198,198),  ( 0,1 ), ( 1,1 ) )            # left colour line
-            pygame.draw.line( colour_rect, (104,100,100), ( 0,0 ), ( 1,0 ) )            # right colour line
-            colour_rect = pygame.transform.smoothscale( colour_rect, ( scoreRect.width, scoreRect.height ) )  # stretch!
+            colour_rect = pygame.Surface( ( 2, 2 ) )                                 
+            pygame.draw.line( colour_rect, (206,198,198),  ( 0,1 ), ( 1,1 ) )            
+            pygame.draw.line( colour_rect, (104,100,100), ( 0,0 ), ( 1,0 ) )            
+            colour_rect = pygame.transform.smoothscale( colour_rect, ( scoreRect.width, scoreRect.height ) )  
             screen.blit( colour_rect, scoreRect )  
 
 
+            screen.blit(score_text_surface, score_text_surface.get_rect(centerx = score_rect.centerx, 
+                centery = score_rect.centery - 50))
             screen.blit(score_value_surface, score_value_surface.get_rect(centerx = score_rect.centerx, 
                 centery = score_rect.centery))
             screen.blit(next_value_surface, next_value_surface.get_rect(centerx = next_rect.centerx, 

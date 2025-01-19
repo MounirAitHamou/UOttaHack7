@@ -12,19 +12,27 @@ class Game:
 		self.blocks = [IBlock(), JBlock(), LBlock(), OBlock(), SBlock(), TBlock(), ZBlock()]
 		self.current_block = self.get_random_block()
 		self.next_block = self.get_random_block()
-		self.recommendation = copy.copy(self.current_block)
 		self.stored_block = None
 		self.game_over = False
 		self.score = 0
-		aiRecommendation = [3,1]
-		for i in range(aiRecommendation[1]):
-			self.recommendation.rotate()
-		self.recommendation.move(1, aiRecommendation[0])
+		self.recommendation = copy.copy(self.current_block)
 
 	def update_score(self, lines_cleared):
 		self.score+= lines_cleared
+		
+	def doAiMove(self, aiRecommendation):
+		self.current_block.resetOffset()
+		self.current_block.rotation_state = 0
+		for i in range(aiRecommendation[1]):
+			self.current_block.rotate()
+		for i in range(aiRecommendation[0]):
+			self.move_right()
+		temp = self.next_block
+		while self.current_block != temp:
+			self.move_down()
 
-	def store_block(self):
+
+	def store_block(self,):
 		if self.stored_block == None:
 			self.current_block.resetOffset()
 			self.stored_block = self.current_block
@@ -35,6 +43,7 @@ class Game:
 			self.current_block.resetOffset()
 			self.stored_block = self.current_block
 			self.current_block = temp
+		
 
 	def get_random_block(self):
 		if len(self.blocks) == 0:
@@ -66,8 +75,6 @@ class Game:
 		for position in tiles:
 			self.grid.grid[position.row][position.column] = self.current_block.id
 		self.current_block = self.next_block
-		self.recommendation = copy.copy(self.current_block)
-		self.setRecommendation([3,0])
 		self.next_block = self.get_random_block()
 		rows_cleared = self.grid.clear_full_rows()
 		if rows_cleared > 0:
@@ -102,6 +109,9 @@ class Game:
 		return True
 	
 	def setRecommendation(self,aiRecommendation):
+		self.recommendation = copy.copy(self.current_block)
+		self.recommendation.resetOffset()
+		self.recommendation.rotation_state = 0
 		for i in range(aiRecommendation[1]):
 			self.recommendation.rotate()
 		self.recommendation.move(1, aiRecommendation[0])

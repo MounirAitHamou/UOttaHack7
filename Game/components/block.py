@@ -45,10 +45,10 @@ class Block:
 				tile_rect = pygame.Rect(offset_x + tile.column * self.cell_size, 
 					offset_y + tile.row * self.cell_size, self.cell_size -1, self.cell_size -1)
 				pygame.draw.rect(screen, self.colors[self.id], tile_rect)
-				colour_rect = pygame.Surface( ( 2, 2 ) )                                   # tiny! 2x2 bitmap
-				pygame.draw.line( colour_rect, (206,198,198),  ( 0,1 ), ( 1,1 ) )            # left colour line
-				pygame.draw.line( colour_rect, (104,100,100), ( 0,0 ), ( 1,0 ) )            # right colour line
-				colour_rect = pygame.transform.smoothscale( colour_rect, ( tile_rect.width, tile_rect.height ) )  # stretch!
+				colour_rect = pygame.Surface( ( 2, 2 ) )                                  
+				pygame.draw.line( colour_rect, (206,198,198),  ( 0,1 ), ( 1,1 ) )           
+				pygame.draw.line( colour_rect, (104,100,100), ( 0,0 ), ( 1,0 ) )          
+				colour_rect = pygame.transform.smoothscale( colour_rect, ( tile_rect.width, tile_rect.height ) ) 
 				screen.blit( colour_rect, tile_rect ) 
 		else:
 			tiles = self.get_cell_positions()
