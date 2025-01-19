@@ -5,6 +5,9 @@ from Game.components.grid import Grid
 def cloneBlock(block: Block) -> Block:
     return copy.deepcopy(block)
 
+def cloneGrid(grid: Grid) -> Grid:
+    return copy.deepcopy(grid)
+
 def lockBlock(grid: Grid, block: Block):
     tiles = block.get_cell_positions()
     for position in tiles:

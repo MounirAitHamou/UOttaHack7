@@ -1,12 +1,11 @@
 from Game.Controller import Controller
-from AI.Tuner import *
+from AI.Tuner import tune
 
-tune = False
+doTune = True
 
 def main():
-    if tune:
-        # Tuner.tune()
-        pass
+    if doTune:
+        tune()
     else:
         Controller.startGame()
 
