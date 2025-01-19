@@ -1,5 +1,5 @@
-from block import Block
-from position import Position
+from Game.components.block import Block
+from Game.components.position import Position
 
 class LBlock(Block):
 	def __init__(self):

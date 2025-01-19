@@ -1,6 +1,6 @@
-from grid import Grid
-from blocks import *
-import block
+from Game.components.grid import Grid
+from Game.components.blocks import *
+import Game.components.block
 import random
 import pygame
 import os

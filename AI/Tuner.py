@@ -1,7 +1,7 @@
 import random as random
 import math as math
-from AI.AI import AI
-from Controller.Controller import Controller
+from Game import controller
+
 def randomInteger(min, max):
     return math.floor(random.random() * (max - min ) + min)
 
@@ -30,7 +30,7 @@ def computeFitness(candidates,number_of_games,maxNumberOfMoves):
         ai = AI(candidate)
         totalScore = 0 
         for j in range(number_of_games):
-            controller = Controller()
+            controller = controller()
             gameState = controller.gameState
             playingPieces = [gameState.getRandomPiece() for _ in range(2)]
             playingPiece = playingPieces[0]
