@@ -32,6 +32,7 @@ class Controller:
 
         clock = pygame.time.Clock()
 
+
         
 
         game = Game()
@@ -40,6 +41,7 @@ class Controller:
             current_block = game.current_block
             next_block = game.next_block
             return getBestMove(grid, [current_block, next_block])
+
 
 
 
@@ -62,16 +64,16 @@ class Controller:
                         game.move_right()
                     if event.key == pygame.K_DOWN and game.game_over == False:
                         game.move_down()
-                        game.setRecommendation(getRecommendation())
+                        game.setRecommendation(getRecommendation(game))
                     if event.key == pygame.K_UP and game.game_over == False:
                         game.rotate()
                     if event.key == pygame.K_2 and game.game_over == False:
-                        game.doAiMove(getRecommendation())
-                        game.setRecommendation(getRecommendation())
+                        game.doAiMove(getRecommendation(game))
+                        game.setRecommendation(getRecommendation(game))
                     if event.key == pygame.K_1 and game.game_over == False:
                         if temp1 != game.current_block:
                             game.store_block()
-                            game.setRecommendation(getRecommendation())
+                            game.setRecommendation(getRecommendation(game))
                             temp1 = game.current_block
                     if event.key == pygame.K_9 and game.game_over == False:
                         pause = not pause
@@ -79,11 +81,11 @@ class Controller:
                         temp = game.next_block
                         while game.current_block != temp:
                             game.move_down()
-                            game.setRecommendation(getRecommendation())
+                            game.setRecommendation(getRecommendation(game))
                 if event.type == GAME_UPDATE and game.game_over == False:
                     if pause != True:
                         game.move_down()
-                        game.setRecommendation(getRecommendation())
+                        game.setRecommendation(getRecommendation(game))
             if temp1 != game.current_block:
                 temp1 = None
             score_value_surface = title_font.render(str(game.score), True, Colors.white)
