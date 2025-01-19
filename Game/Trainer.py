@@ -22,3 +22,7 @@ class Trainer:
 
     def lockBlock(self):
         self.game.lock_block()
+    
+    def moveDown(self):
+        while self.game.current_block != self.game.next_block:
+            self.game.move_down()
