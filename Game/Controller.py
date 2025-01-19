@@ -4,6 +4,7 @@ from Game.components.colors import Colors
 
 class Controller:
     def startGame():
+        pause = False
         pygame.init()
         temp1 = None
         title_font = pygame.font.Font(None, 40)
@@ -19,8 +20,13 @@ class Controller:
         screen = pygame.display.set_mode((1000, 800))
         img = pygame.image.load("Game\Images\Room.png")
         img = pygame.transform.scale(img, (1000, 800))
-        r = img.get_rect()
-        r.center = screen.get_rect().center
+        sky = pygame.image.load("Game\Images\Sky.png")
+        sky = pygame.transform.scale(sky, (next_rect.width, next_rect.height))
+        hangar = pygame.image.load("Game\Images\Hangar.png")
+        hangar = pygame.transform.scale(hangar, (stored_rect.width, stored_rect.height))
+
+        r1 = img.get_rect()
+        r1.center = screen.get_rect().center
         pygame.display.set_caption("Python Tetris")
 
         clock = pygame.time.Clock()
@@ -52,13 +58,16 @@ class Controller:
                         if temp1 != game.current_block:
                             game.store_block()
                             temp1 = game.current_block
+                    if event.key == pygame.K_9 and game.game_over == False:
+                        pause = True
                     if event.key == pygame.K_SPACE and game.game_over == False:
                         temp = game.next_block
                         while game.current_block != temp:
                             game.update_score(0, 1)
                             game.move_down()
                 if event.type == GAME_UPDATE and game.game_over == False:
-                    game.move_down()
+                    if pause != True:
+                        game.move_down()
             if temp1 != game.current_block:
                 temp1 = None
             #Drawing
@@ -70,12 +79,15 @@ class Controller:
             screen.blit(score_surface, (630, 20, 50, 50))
             screen.blit(next_surface, (630, 500, 50, 50))
             screen.blit(stored_surface, (630, 405, 50, 50))
-            screen.blit(img,r)
+            screen.blit(img,r1)
 
             if game.game_over == True:
                 screen.blit(game_over_surface, (320, 450, 50, 50))
             bg = pygame.Rect(50, 50, 800, 750)
+            bgOutline1 = pygame.Rect(50,50,840,790)
             bg.center = screen.get_rect().center
+            bgOutline1.center = screen.get_rect().center
+            pygame.draw.rect(screen, (0,0,0), bgOutline1)
             pygame.draw.rect(screen, (31,29,29), bg)
             scoreRect = pygame.Rect(10, 10, 170, 60)
             scoreOut1 = pygame.Rect(10,10, 175, 65)
@@ -100,8 +112,12 @@ class Controller:
                 centery = next_rect.centery - 110))
             screen.blit(stored_value_surface, stored_value_surface.get_rect(centerx = stored_rect.centerx, 
                 centery = stored_rect.centery - 110))
-            pygame.draw.rect(screen, Colors.light_blue, next_rect, 0, 10)
-            pygame.draw.rect(screen, Colors.light_blue, stored_rect, 0, 10)
+            r2 = sky.get_rect()
+            r2.center = next_rect.center
+            r3 = hangar.get_rect()
+            r3.center = stored_rect.center
+            screen.blit(sky,r2)
+            screen.blit(hangar,r3)
             game.draw(screen)
 
             pygame.display.update()

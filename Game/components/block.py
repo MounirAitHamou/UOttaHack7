@@ -55,5 +55,5 @@ class Block:
 			for tile in tiles:
 				tile_rect = pygame.Rect(offset_x + tile.column * self.cell_size, 
 					offset_y + tile.row * self.cell_size, self.cell_size -1, self.cell_size -1)
-				pygame.draw.rect(screen, Colors.light_blue, tile_rect, 3)
+				pygame.draw.rect(screen, Colors.white, tile_rect, 3)
 

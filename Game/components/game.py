@@ -122,7 +122,7 @@ class Game:
 		elif self.next_block.id == 4:
 			self.next_block.draw(screen, 685, 310, 0)
 		else:
-			self.next_block.draw(screen, 665, 310, 0)
+			self.next_block.draw(screen, 665, 300, 0)
 
 		if self.stored_block != None:
 			if self.stored_block.id == 3:
