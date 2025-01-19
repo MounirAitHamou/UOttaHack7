@@ -21,14 +21,8 @@ class Game:
 			self.recommendation.rotate()
 		self.recommendation.move(1, aiRecommendation[0])
 
-	def update_score(self, lines_cleared, move_down_points):
-		if lines_cleared == 1:
-			self.score += 100
-		elif lines_cleared == 2:
-			self.score += 300
-		elif lines_cleared == 3:
-			self.score += 500
-		self.score += move_down_points
+	def update_score(self, lines_cleared):
+		self.score+= lines_cleared
 
 	def store_block(self):
 		if self.stored_block == None:
@@ -77,7 +71,7 @@ class Game:
 		self.next_block = self.get_random_block()
 		rows_cleared = self.grid.clear_full_rows()
 		if rows_cleared > 0:
-			self.update_score(rows_cleared, 0)
+			self.update_score(rows_cleared)
 		if self.block_fits() == False:
 			self.game_over = True
 

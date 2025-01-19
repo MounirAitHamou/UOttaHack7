@@ -17,7 +17,6 @@ class AI:
         bestScore = None
         playingPiece = playingPieces[playingPieceIndex]
 
-
         for rotation in range(4):
             piece = cloneBlock(playingPiece)
 
@@ -37,9 +36,14 @@ class AI:
                     score = -self.heightWeight * moveParameters.AggregateHeight + self.completeLinesWeight * moveParameters.CompleteLines - self.holesWeight * moveParameters.Holes - self.bumpinessWeight * moveParameters.Bumpiness
                 else:
                     score = self.best(gridClone, playingPieces, playingPieceIndex + 1)[1]
-                if bestScore == None or score>bestScore:
+                
+
+                if bestScore is None or score > bestScore:
                     bestScore = score
                     best = cloneBlock(pieceCopy)
+                
+
+                    
                 attemptToMoveRight(grid, piece)
         return (best, bestScore)
 
