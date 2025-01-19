@@ -59,7 +59,7 @@ class Game:
 		if self.block_inside() == False or self.block_fits() == False:
 			self.current_block.move(-1, 0)
 			self.lock_block()
-		self.grid.get_game_state()
+		self.grid.get_gameState()
 
 	def lock_block(self):
 		tiles = self.current_block.get_cell_positions()
@@ -98,3 +98,4 @@ class Game:
 			if self.grid.is_inside(tile.row, tile.column) == False:
 				return False
 		return True
+
