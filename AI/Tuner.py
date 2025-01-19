@@ -31,7 +31,7 @@ def sortCandidates(candidates):
 
 def computeFitnesses(candidates, number_of_games, maxNumberOfMoves):
     for i in range(len(candidates)):
-        if i % (len(candidates) // 100) == 0:
+        if i % (math.ceil(len(candidates) / 100)) == 0:
             print((i / len(candidates)) * 100, "%")
         candidate = candidates[i]
         ai = AI(candidate)
