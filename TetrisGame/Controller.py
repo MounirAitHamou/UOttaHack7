@@ -18,11 +18,11 @@ class Controller:
         stored_rect = pygame.Rect(630, 480, 170, 180)
 
         screen = pygame.display.set_mode((1000, 800))
-        img = pygame.image.load("Game\Images\Room.png")
+        img = pygame.image.load("TetrisGame\Images\Room.png")
         img = pygame.transform.scale(img, (1000, 800))
-        sky = pygame.image.load("Game\Images\Sky.png")
+        sky = pygame.image.load("TetrisGame\Images\Sky.png")
         sky = pygame.transform.scale(sky, (next_rect.width, next_rect.height))
-        hangar = pygame.image.load("Game\Images\Hangar.png")
+        hangar = pygame.image.load("TetrisGame\Images\Hangar.png")
         hangar = pygame.transform.scale(hangar, (stored_rect.width, stored_rect.height))
 
         r1 = img.get_rect()

@@ -1,7 +1,7 @@
 from TetrisGame.Controller import Controller
 from AI.Tuner import tune
 
-doTune = True
+doTune = False
 
 def main():
     if doTune:
