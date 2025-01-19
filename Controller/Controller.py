@@ -3,9 +3,8 @@ import time
 import sys
 import os
 
-from Shared_Util.Gamestate import GameState
-from Shared_Util.Piece import Piece
-
+from Current_Game.Gamestate import GameState
+from Current_Game.block import Block
 
 class Controller:
     def __init__(self):
@@ -36,9 +35,10 @@ class Controller:
             for _ in range(-distance):
                 playerPiece.move(-1)
 
+    def dropPiece(self):
+        if(canMove(self.gameState, self.gameState.playerPiece)):
+            self.gameState.playerPiece.coordinates.y += 1
 
-
-            
-
-
-    
+    def canMove(self, action: Piece):
+        playerPiece = self.gameState.playerPiece
+        #TODO
