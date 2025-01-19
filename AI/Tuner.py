@@ -43,9 +43,7 @@ def computeFitnesses(candidates,number_of_games,maxNumberOfMoves):
             while numberOfMoves < maxNumberOfMoves and not trainer.isGameOver():
                 numberOfMoves += 1
                 playingPiece = ai.best(trainer.game.grid, playingPieces)[0]
-                print(46)
                 score += trainer.step(playingPiece)
-                print(48)
                 playingPieces[:-1] = playingPieces[1:]
                 playingPieces[-1] = trainer.getRandomPiece()
                 playingPiece = playingPieces[0]

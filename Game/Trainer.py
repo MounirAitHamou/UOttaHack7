@@ -15,5 +15,7 @@ class Trainer:
 
     def step(self, block: Block) -> int:
         self.game.current_block = block
-        while self.game.current_block != self.game.next_block:
+        original_score = self.game.score
+        while self.game.current_block == block:
             self.game.move_down()
+        return self.game.score - original_score
