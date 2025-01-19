@@ -114,18 +114,20 @@ class Game:
 
 	def draw(self, screen):
 		self.grid.draw(screen)
-		self.current_block.draw(screen, 11, 11, 0)
-		self.recommendation.draw(screen, 11, 11, 1)
+		self.current_block.draw(screen, 175, 50, 0)
+		self.recommendation.draw(screen, 175, 50, 1)
 
 		if self.next_block.id == 3:
-			self.next_block.draw(screen, 340, 275, 0)
+			self.next_block.draw(screen, 645, 290, 0)
 		elif self.next_block.id == 4:
-			self.next_block.draw(screen, 370, 270, 0)
+			self.next_block.draw(screen, 685, 310, 0)
 		else:
-			self.next_block.draw(screen, 370, 270, 0)
+			self.next_block.draw(screen, 665, 310, 0)
 
 		if self.stored_block != None:
 			if self.stored_block.id == 3:
-				self.stored_block.draw(screen, 340, 495, 0)
+				self.stored_block.draw(screen, 645, 525, 0)
+			elif self.stored_block.id == 4:
+				self.stored_block.draw(screen, 680, 540, 0)
 			else: 
-				self.stored_block.draw(screen, 370, 500, 0)
+				self.stored_block.draw(screen, 660, 545, 0)

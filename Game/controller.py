@@ -12,11 +12,15 @@ class Controller:
         stored_surface = title_font.render("Stored", True, Colors.white)
         game_over_surface = title_font.render("GAME OVER", True, Colors.white)
 
-        score_rect = pygame.Rect(320, 55, 170, 60)
-        next_rect = pygame.Rect(320, 215, 170, 180)
-        stored_rect = pygame.Rect(320, 435, 170, 180)
+        score_rect = pygame.Rect(630, 100, 170, 80)
+        next_rect = pygame.Rect(630, 255, 170, 180)
+        stored_rect = pygame.Rect(630, 480, 170, 180)
 
-        screen = pygame.display.set_mode((500, 620))
+        screen = pygame.display.set_mode((1000, 800))
+        img = pygame.image.load("Game\Images\Room.png")
+        img = pygame.transform.scale(img, (1000, 800))
+        r = img.get_rect()
+        r.center = screen.get_rect().center
         pygame.display.set_caption("Python Tetris")
 
         clock = pygame.time.Clock()
@@ -59,18 +63,43 @@ class Controller:
                 temp1 = None
             #Drawing
             score_value_surface = title_font.render(str(game.score), True, Colors.white)
+            next_value_surface = title_font.render("Incoming", True, Colors.white)
+            stored_value_surface = title_font.render("Stored", True, Colors.white)
 
             screen.fill(Colors.dark_blue)
-            screen.blit(score_surface, (365, 20, 50, 50))
-            screen.blit(next_surface, (375, 180, 50, 50))
-            screen.blit(stored_surface, (360, 405, 50, 50))
+            screen.blit(score_surface, (630, 20, 50, 50))
+            screen.blit(next_surface, (630, 500, 50, 50))
+            screen.blit(stored_surface, (630, 405, 50, 50))
+            screen.blit(img,r)
 
             if game.game_over == True:
                 screen.blit(game_over_surface, (320, 450, 50, 50))
+            bg = pygame.Rect(50, 50, 800, 750)
+            bg.center = screen.get_rect().center
+            pygame.draw.rect(screen, (31,29,29), bg)
+            scoreRect = pygame.Rect(10, 10, 170, 60)
+            scoreOut1 = pygame.Rect(10,10, 175, 65)
+            scoreOut2 = pygame.Rect(10,10, 180, 70)
+            scoreRect.center = score_rect.center
+            scoreOut1.center = score_rect.center
+            scoreOut2.center = score_rect.center
+            pygame.draw.rect(screen, (206,198,198),scoreOut2)
+            pygame.draw.rect(screen, (0, 0, 0),scoreOut1)
+            pygame.draw.rect(screen, Colors.white, scoreRect)
 
-            pygame.draw.rect(screen, Colors.light_blue, score_rect, 0, 10)
+            colour_rect = pygame.Surface( ( 2, 2 ) )                                   # tiny! 2x2 bitmap
+            pygame.draw.line( colour_rect, (206,198,198),  ( 0,1 ), ( 1,1 ) )            # left colour line
+            pygame.draw.line( colour_rect, (104,100,100), ( 0,0 ), ( 1,0 ) )            # right colour line
+            colour_rect = pygame.transform.smoothscale( colour_rect, ( scoreRect.width, scoreRect.height ) )  # stretch!
+            screen.blit( colour_rect, scoreRect )  
+
+
             screen.blit(score_value_surface, score_value_surface.get_rect(centerx = score_rect.centerx, 
                 centery = score_rect.centery))
+            screen.blit(next_value_surface, next_value_surface.get_rect(centerx = next_rect.centerx, 
+                centery = next_rect.centery - 110))
+            screen.blit(stored_value_surface, stored_value_surface.get_rect(centerx = stored_rect.centerx, 
+                centery = stored_rect.centery - 110))
             pygame.draw.rect(screen, Colors.light_blue, next_rect, 0, 10)
             pygame.draw.rect(screen, Colors.light_blue, stored_rect, 0, 10)
             game.draw(screen)
