@@ -17,7 +17,12 @@ def generateRandomCandidate():
     linesWeight = random.random() - 0.5
     holesWeight = random.random() - 0.5
     bumpinessWeight = random.random() - 0.5
-    candidate = [heightWeight, linesWeight, holesWeight, bumpinessWeight]
+    candidate = {
+        "heightWeight": heightWeight,
+        "linesWeight": linesWeight,
+        "holesWeight": holesWeight,
+        "bumpinessWeight": bumpinessWeight
+    }
     normalizeCandidate(candidate)
     return candidate
 
@@ -37,13 +42,13 @@ def computeFitnesses(candidates,number_of_games,maxNumberOfMoves):
             numberOfMoves= 0
             while numberOfMoves < maxNumberOfMoves and not controller.isGameOver():
                 numberOfMoves += 1
-                playingPiece = AI.best(controller, playingPieces)
+                playingPiece = ai.best(controller, playingPieces)
                 score += controller.step(playingPiece)
                 playingPieces[:-1] = playingPieces[1:]
                 playingPieces[-1] = controller.getRandomPiece()
                 playingPiece = playingPieces[0]
             totalScore += score
-        candidate.fitness = totalScore
+        candidate["fitness"] = totalScore
 
 def tournamentSelectPair(candidates, ways):
     indices = []
@@ -55,7 +60,7 @@ def tournamentSelectPair(candidates, ways):
     for i in range(ways):
         selected_index = indices.pop(random.randint(0, len(indices) - 1))
         if fittestCandidateIndex1 == None or selected_index < fittestCandidateIndex1:
-            fittestCanddateIndex2 = fittestCandidateIndex1
+            fittestCandidateIndex2 = fittestCandidateIndex1
             fittestCandidateIndex1 = selected_index
         elif fittestCandidateIndex2 == None or selected_index < fittestCandidateIndex2:
             fittestCandidateIndex2 = selected_index
@@ -77,16 +82,16 @@ def mutateCandidate(candidate):
     mutatedGene = random.randint(0, 3)
     match mutatedGene:
         case 0:
-            candidate.heightWeight += quantity
+            candidate["heightWeight"] += quantity
         case 1:
-            candidate.linesWeight += quantity
+            candidate["linesWeight"] += quantity
         case 2:
-            candidate.holesWeight += quantity
+            candidate["holesWeight"] += quantity
         case 3:
-            candidate.bumpinessWeight += quantity
+            candidate["bumpinessWeight"] += quantity
 
 
-def deleteNLastReplacement(candidates, newCandidates):
+def deleteNLastReplacement(candidates: list, newCandidates):
     candidates = candidates[:-len(newCandidates)]
     candidates.extend(newCandidates)
     sortCandidates(candidates)
@@ -112,13 +117,13 @@ def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate 
         deleteNLastReplacement(candidates,newCandidates)
         totalFitness = 0
         for candidate in candidates:
-            totalFitness += candidate.fitness
+            totalFitness += candidate["fitness"]
         
 
         highestCandidate = candidates[0]
         print(f"Generation: {count}, Best Fitness: {candidates[0].fitness}, Average Fitness: {totalFitness / len(candidates)}")
         #save candidate to file
-        print(f"Height Weight: {highestCandidate.heightWeight}, Lines Weight: {highestCandidate.linesWeight}, Holes Weight: {highestCandidate.holesWeight}, Bumpiness Weight: {highestCandidate.bumpinessWeight}")
+        print(f"Height Weight: {highestCandidate["heightWeights"]}, Lines Weight: {highestCandidate["linesWeight"]}, Holes Weight: {highestCandidate["holesWeight"]}, Bumpiness Weight: {highestCandidate["bumpinessWeight"]}")
         count+=1
 
 
