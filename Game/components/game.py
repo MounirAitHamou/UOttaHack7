@@ -50,19 +50,15 @@ class Game:
 		block.resetOffset()
 		return block
 
-	def move_left(self) -> bool:
+	def move_left(self):
 		self.current_block.move(0, -1)
 		if self.block_inside() == False or self.block_fits() == False:
 			self.current_block.move(0, 1)
-			return False
-		return True
 
-	def move_right(self) -> bool:
+	def move_right(self):
 		self.current_block.move(0, 1)
 		if self.block_inside() == False or self.block_fits() == False:
 			self.current_block.move(0, -1)
-			return False
-		return True
 
 	def move_down(self):
 		self.current_block.move(1, 0)
