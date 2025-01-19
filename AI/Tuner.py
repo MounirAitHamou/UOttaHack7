@@ -1,16 +1,16 @@
 import random as random
 import math as math
 from AI.AI import AI
-from Game.Controller import Controller
+from Game.Trainer import Trainer
 def randomInteger(min, max):
     return math.floor(random.random() * (max - min ) + min)
 
 def normalizeCandidate(candidate):
-    norm = math.sqrt(sum([x**2 for x in candidate]))
-    candidate.heightWeight /= norm
-    candidate.linesWeight /= norm
-    candidate.holesWeight /= norm
-    candidate.bumpinessWeight /= norm
+    norm = math.sqrt(candidate["heightWeight"] ** 2 + candidate["linesWeight"] ** 2 + candidate["holesWeight"] ** 2 + candidate["bumpinessWeight"] ** 2)
+    candidate["heightWeight"] /= norm
+    candidate["linesWeight"] /= norm
+    candidate["holesWeight"] /= norm
+    candidate["bumpinessWeight"] /= norm
 
 def generateRandomCandidate():
     heightWeight = random.random() - 0.5
@@ -35,18 +35,21 @@ def computeFitnesses(candidates,number_of_games,maxNumberOfMoves):
         ai = AI(candidate)
         totalScore = 0 
         for j in range(number_of_games):
-            controller = Controller()
-            playingPieces = [controller.getRandomPiece() for _ in range(2)]
+            trainer = Trainer()
+            playingPieces = [trainer.getRandomPiece() for _ in range(2)]
             playingPiece = playingPieces[0]
             score = 0
             numberOfMoves= 0
-            while numberOfMoves < maxNumberOfMoves and not controller.isGameOver():
+            while numberOfMoves < maxNumberOfMoves and not trainer.isGameOver():
                 numberOfMoves += 1
-                playingPiece = ai.best(controller, playingPieces)
-                score += controller.step(playingPiece)
+                playingPiece = ai.best(trainer.game.grid, playingPieces)[0]
+                print(46)
+                score += trainer.step(playingPiece)
+                print(48)
                 playingPieces[:-1] = playingPieces[1:]
-                playingPieces[-1] = controller.getRandomPiece()
+                playingPieces[-1] = trainer.getRandomPiece()
                 playingPiece = playingPieces[0]
+            
             totalScore += score
         candidate["fitness"] = totalScore
 
@@ -105,6 +108,7 @@ def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate 
     sortCandidates(candidates)
     count = 0
     while True:
+        
         newCandidates = []
         for _ in range(30):
             pair = tournamentSelectPair(candidates,selection)
@@ -125,7 +129,7 @@ def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate 
         #save candidate to file
         print(f"Height Weight: {highestCandidate["heightWeights"]}, Lines Weight: {highestCandidate["linesWeight"]}, Holes Weight: {highestCandidate["holesWeight"]}, Bumpiness Weight: {highestCandidate["bumpinessWeight"]}")
         count+=1
-
+    
 
 
 
