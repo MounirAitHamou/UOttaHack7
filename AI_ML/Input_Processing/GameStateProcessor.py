@@ -74,9 +74,7 @@ def moveParametersFromGameState(gameState: GameState) -> list[MoveParameters]:
             # Calculate the Vertical Distance
             verticalDistance: int = 0
 
-            # Calculate the tick time
-
-            moveParameters.append(MoveParameters(aggregateHeight, totalCompleteLines, totalHoles, bumpiness, verticalDistance, gameState.tickTime))
+            moveParameters.append(MoveParameters(aggregateHeight, totalCompleteLines, totalHoles, bumpiness, verticalDistance))
 
 def canMove(gameState, piece):
     return True
