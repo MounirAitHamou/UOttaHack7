@@ -16,3 +16,9 @@ class Trainer:
     def step(self, block: Block) -> int:
         while self.game.current_block != self.game.next_block:
             self.game.move_down()
+
+    def attemptToMoveLeft(self) -> bool:
+        return self.game.move_left()
+
+    def lockBlock(self):
+        self.game.lock_block()

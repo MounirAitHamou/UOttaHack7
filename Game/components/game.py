@@ -44,10 +44,12 @@ class Game:
 		block.resetOffset()
 		return block
 
-	def move_left(self):
+	def move_left(self) -> bool:
 		self.current_block.move(0, -1)
 		if self.block_inside() == False or self.block_fits() == False:
 			self.current_block.move(0, 1)
+			return False
+		return True
 
 	def move_right(self):
 		self.current_block.move(0, 1)
