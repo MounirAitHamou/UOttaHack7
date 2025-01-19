@@ -29,11 +29,13 @@ def generateRandomCandidate():
 def sortCandidates(candidates):
     return sorted(candidates, key = lambda x: x.fitness, reverse = True)
 
-def computeFitnesses(candidates,number_of_games,maxNumberOfMoves):
+def computeFitnesses(candidates, number_of_games, maxNumberOfMoves):
     for i in range(len(candidates)):
+        if i % (len(candidates) // 100) == 0:
+            print((i / len(candidates)) * 100, "%")
         candidate = candidates[i]
         ai = AI(candidate)
-        totalScore = 0 
+        totalScore = 0
         for j in range(number_of_games):
             trainer = Trainer()
             playingPieces = [trainer.getRandomPiece() for _ in range(2)]
@@ -43,11 +45,13 @@ def computeFitnesses(candidates,number_of_games,maxNumberOfMoves):
             while numberOfMoves < maxNumberOfMoves and not trainer.isGameOver():
                 numberOfMoves += 1
                 playingPiece = ai.best(trainer.game.grid, playingPieces)[0]
+                if playingPiece is None:
+                    break
                 score += trainer.step(playingPiece)
                 playingPieces[:-1] = playingPieces[1:]
                 playingPieces[-1] = trainer.getRandomPiece()
                 playingPiece = playingPieces[0]
-            
+
             totalScore += score
         candidate["fitness"] = totalScore
 
@@ -77,7 +81,6 @@ def crossOver(candidate1, candidate2):
     normalizeCandidate(candidate)
     return candidate
 
-
 def mutateCandidate(candidate):
     quantity = random.random() * 0.4 - 0.2
     mutatedGene = random.randint(0, 3)
@@ -91,13 +94,10 @@ def mutateCandidate(candidate):
         case 3:
             candidate["bumpinessWeight"] += quantity
 
-
 def deleteNLastReplacement(candidates: list, newCandidates):
     candidates = candidates[:-len(newCandidates)]
     candidates.extend(newCandidates)
     sortCandidates(candidates)
-
-
 
 def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate = 0.05):
     candidates = []
@@ -114,6 +114,7 @@ def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate 
             if random.random() < mutationRate:
                 mutateCandidate(candidate)
             normalizeCandidate(candidate)
+            print(candidate)
             newCandidates.append(candidate)
         computeFitnesses(newCandidates,rounds,moves)
         deleteNLastReplacement(candidates,newCandidates)
@@ -121,20 +122,8 @@ def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate 
         for candidate in candidates:
             totalFitness += candidate["fitness"]
         
-
         highestCandidate = candidates[0]
         print(f"Generation: {count}, Best Fitness: {candidates[0].fitness}, Average Fitness: {totalFitness / len(candidates)}")
         #save candidate to file
         print(f"Height Weight: {highestCandidate["heightWeights"]}, Lines Weight: {highestCandidate["linesWeight"]}, Holes Weight: {highestCandidate["holesWeight"]}, Bumpiness Weight: {highestCandidate["bumpinessWeight"]}")
         count+=1
-    
-
-
-
-                
-
-
-
-            
-
-            
