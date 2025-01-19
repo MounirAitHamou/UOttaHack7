@@ -4,7 +4,7 @@ import random
 from collections import deque
 from Controller.Controller import Controller
 
-
+global epsilon
 state_size = 6 
 action_size = 4  
 learning_rate = 0.001
@@ -83,7 +83,6 @@ for episode in range(episodes):
             break
     
 
-    global epsilon
     epsilon = max(epsilon_min, epsilon * epsilon_decay)
     
 
