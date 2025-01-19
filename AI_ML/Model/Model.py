@@ -5,8 +5,8 @@ from collections import deque
 from Controller.Controller import Controller
 
 global epsilon
-state_size = 6 
-action_size = 4  
+state_size = 5
+action_size = 1 
 learning_rate = 0.001
 gamma = 0.99
 epsilon = 1.0
