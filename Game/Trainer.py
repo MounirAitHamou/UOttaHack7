@@ -17,11 +17,13 @@ class Trainer:
         while self.game.current_block != self.game.next_block:
             self.game.move_down()
 
-    def attemptToMoveLeft(self) -> bool:
-        return self.game.move_left()
+    def attemptToMoveLeft(self):
+        while(self.game.move_left()):
+            pass
     
-    def attemptToMoveRight(self) -> bool:
-        return self.game.move_right()
+    def attemptToMoveRight(self):
+        while(self.game.move_right()):
+            pass
 
     def lockBlock(self):
         self.game.lock_block()
