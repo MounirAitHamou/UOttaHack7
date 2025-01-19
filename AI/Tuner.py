@@ -31,7 +31,7 @@ def sortCandidates(candidates):
 
 def computeFitnesses(candidates, number_of_games, maxNumberOfMoves):
     for i in range(len(candidates)):
-        if i % (math.ceil(len(candidates) / 100)) == 0:
+        if i % (math.ceil(len(candidates) / 5)) == 0:
             print((i / len(candidates)) * 100, "%")
         candidate = candidates[i]
         ai = AI(candidate)
@@ -63,6 +63,8 @@ def tournamentSelectPair(candidates, ways):
     fittestCandidateIndex1 = None
     fittestCandidateIndex2 = None
     for i in range(ways):
+        if indices is None or len(indices) == 0:
+            break
         selected_index = indices.pop(random.randint(0, len(indices) - 1))
         if fittestCandidateIndex1 == None or selected_index < fittestCandidateIndex1:
             fittestCandidateIndex2 = fittestCandidateIndex1
@@ -99,7 +101,7 @@ def deleteNLastReplacement(candidates: list, newCandidates):
     candidates.extend(newCandidates)
     sortCandidates(candidates)
 
-def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate = 0.05):
+def tune(population = 5, rounds = 3, moves = 150, selection = 10, mutationRate = 0.05):
     candidates = []
     candidates.extend([generateRandomCandidate() for _ in range(population)])
     computeFitnesses(candidates,rounds,moves)
