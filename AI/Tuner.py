@@ -1,7 +1,7 @@
 import random as random
 import math as math
 from AI.AI import AI
-from Controller.Controller import Controller
+from Game.controller import Controller
 def randomInteger(min, max):
     return math.floor(random.random() * (max - min ) + min)
 
