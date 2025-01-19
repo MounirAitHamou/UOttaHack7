@@ -14,6 +14,5 @@ class Trainer:
         return self.game.game_over
 
     def step(self, block: Block) -> int:
-        temp = self.game.next_block
-        while self.game.current_block != temp:
+        while self.game.current_block != self.game.next_block:
             self.game.move_down()
