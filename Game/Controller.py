@@ -1,6 +1,7 @@
 import pygame,sys
 from Game.components.game import Game
 from Game.components.colors import Colors
+from AI.AI_Wrapper import getBestMove
 
 class Controller:
     def startGame():
@@ -31,13 +32,18 @@ class Controller:
 
         clock = pygame.time.Clock()
 
-        def getRecommendation():
-            return [3,1]
+        
 
         game = Game()
-        game.setRecommendation(getRecommendation())
+        def getRecommendation():
+            grid = game.grid
+            current_block = game.current_block
+            next_block = game.next_block
+            return getBestMove(grid, [current_block, next_block])
 
-        
+
+
+
         GAME_UPDATE = pygame.USEREVENT
         pygame.time.set_timer(GAME_UPDATE, 200)
 
