@@ -27,7 +27,7 @@ def generateRandomCandidate():
     return candidate
 
 def sortCandidates(candidates):
-    return sorted(candidates, key = lambda x: x.fitness, reverse = True)
+    return sorted(candidates, key = lambda x: x["fitness"], reverse = True)
 
 def computeFitnesses(candidates, number_of_games, maxNumberOfMoves):
     for i in range(len(candidates)):
@@ -123,7 +123,7 @@ def tune(population = 100, rounds = 5, moves = 200, selection = 10,mutationRate 
             totalFitness += candidate["fitness"]
         
         highestCandidate = candidates[0]
-        print(f"Generation: {count}, Best Fitness: {candidates[0].fitness}, Average Fitness: {totalFitness / len(candidates)}")
+        print(f"Generation: {count}, Best Fitness: {candidates[0]["fitness"]}, Average Fitness: {totalFitness / len(candidates)}")
         #save candidate to file
         print(f"Height Weight: {highestCandidate["heightWeights"]}, Lines Weight: {highestCandidate["linesWeight"]}, Holes Weight: {highestCandidate["holesWeight"]}, Bumpiness Weight: {highestCandidate["bumpinessWeight"]}")
         count+=1
