@@ -17,6 +17,7 @@ class Game:
 		self.game_over = False
 		self.score = 0
 		self.recommendation = copy.copy(self.current_block)
+		self.setRecommendation(getBestMove(self.grid, [self.current_block, self.next_block]))
 
 	def update_score(self, lines_cleared):
 		self.score+= lines_cleared
