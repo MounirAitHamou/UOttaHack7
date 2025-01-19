@@ -1,6 +1,6 @@
 import random as random
 import math as math
-from Game import controller
+from Game import Controller
 
 def randomInteger(min, max):
     return math.floor(random.random() * (max - min ) + min)

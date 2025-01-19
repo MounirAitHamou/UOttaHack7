@@ -1,4 +1,4 @@
-from Game.controller import Controller
+from Game.Controller import Controller
 from AI.Tuner import *
 
 tune = False
